@@ -19,7 +19,7 @@ namespace JwtAuthDemo.Controllers
         /// <param name="user"></param>
         /// <returns></returns>
         //[HttpGet(Name = nameof(GetClaims))]
-        [HttpGet(Name = "claims")]
+        [HttpGet("claims")]
         public IActionResult GetClaims(ClaimsPrincipal user)
         {
             return Ok(user.Claims.Select(p => new { p.Type, p.Value }));
@@ -30,7 +30,7 @@ namespace JwtAuthDemo.Controllers
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
-        [HttpGet(Name = "username")]
+        [HttpGet("username")]
         public IActionResult GetUserName(ClaimsPrincipal user)
         {
             return Ok(user.Identity?.Name); 
@@ -42,7 +42,7 @@ namespace JwtAuthDemo.Controllers
         /// <param name="user"></param>
         /// <param name="name"></param>
         /// <returns></returns>
-        [HttpGet(Name = "isInRole")]
+        [HttpGet("isInRole")]
         public IActionResult IsInRole(ClaimsPrincipal user, string name)
         {
             return Ok(user.IsInRole(name));
@@ -54,7 +54,7 @@ namespace JwtAuthDemo.Controllers
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
-        [HttpGet(Name = "jwtid")]
+        [HttpGet("jwtid")]
         public IActionResult GetJwtId(ClaimsPrincipal user)
         {
             return Ok(user.Claims.FirstOrDefault(p => p.Type == "jti")?.Value);

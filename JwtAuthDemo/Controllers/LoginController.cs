@@ -9,6 +9,13 @@
     [ApiController]
     public class LoginController : ControllerBase
     {
+        private JwtHelpers _jwt;
+
+        public LoginController(JwtHelpers jwt)
+        {   
+            _jwt = jwt;
+        }
+
         private bool ValidateUser(LoginViewModel login)
         {
             return true;
@@ -21,12 +28,12 @@
         /// <param name="jwt"></param>
         /// <returns></returns>
         //[HttpPost(Name = nameof(SignIn))]
-        [HttpPost(Name = "signin")]
-        public IActionResult SignIn(LoginViewModel login, JwtHelpers jwt)
+        [HttpPost("signin")]
+        public IActionResult SignIn(LoginViewModel login)
         {
             if (ValidateUser(login))
             {
-                var token = jwt.GenerateToken(login.UserName);
+                var token = _jwt.GenerateToken(login.UserName);
                 return Ok(new { token });
             }
             else
