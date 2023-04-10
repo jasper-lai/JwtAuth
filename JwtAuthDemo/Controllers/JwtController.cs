@@ -16,48 +16,44 @@ namespace JwtAuthDemo.Controllers
         /// <summary>
         /// 取得 JWT Token 中的所有 Claims
         /// </summary>
-        /// <param name="user"></param>
         /// <returns></returns>
         //[HttpGet(Name = nameof(GetClaims))]
         [HttpGet("claims")]
-        public IActionResult GetClaims(ClaimsPrincipal user)
+        public IActionResult GetAllClaims()
         {
-            return Ok(user.Claims.Select(p => new { p.Type, p.Value }));
+            return Ok(User.Claims.Select(p => new { p.Type, p.Value }));
         }
 
         /// <summary>
         /// 取得 JWT Token 中的使用者名稱
         /// </summary>
-        /// <param name="user"></param>
         /// <returns></returns>
         [HttpGet("username")]
-        public IActionResult GetUserName(ClaimsPrincipal user)
+        public IActionResult GetUserName()
         {
-            return Ok(user.Identity?.Name); 
+            return Ok(User.Identity?.Name); 
         }
 
         /// <summary>
         /// 取得使用者是否擁有特定角色
         /// </summary>
-        /// <param name="user"></param>
         /// <param name="name"></param>
         /// <returns></returns>
         [HttpGet("isInRole")]
-        public IActionResult IsInRole(ClaimsPrincipal user, string name)
+        public IActionResult IsInRole(string name)
         {
-            return Ok(user.IsInRole(name));
+            return Ok(User.IsInRole(name));
         }
 
 
         /// <summary>
         /// 取得 JWT Token 中的 JWT ID
         /// </summary>
-        /// <param name="user"></param>
         /// <returns></returns>
         [HttpGet("jwtid")]
-        public IActionResult GetJwtId(ClaimsPrincipal user)
+        public IActionResult GetJwtId()
         {
-            return Ok(user.Claims.FirstOrDefault(p => p.Type == "jti")?.Value);
+            return Ok(User.Claims.FirstOrDefault(p => p.Type == "jti")?.Value);
         }
 
 
