@@ -1,3 +1,5 @@
+using JwtAuthDemo.Helpers;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -6,6 +8,10 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+#region (jasper) Add JwtHelpers to DI
+builder.Services.AddSingleton<JwtHelpers>();
+#endregion
 
 var app = builder.Build();
 
